@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificates</title>
+<style>
+  .carousel {
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .carousel-container {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  .certificate {
+    flex: 0 0 auto;
+    width: 100%;
+    
+  }
+  .certificate img {
+    width: 100%;
+    height: auto;
+  }
+  .description {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+  }
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    border-radius: 50%;
+  }
+  .arrow.left {
+    left: 10px;
+  }
+  .arrow.right {
+    right: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="carousel">
+  <div class="carousel-container">
+    <div class="certificate">
+      <img src="udemy python.jpg" alt="Certificate 1">
+    </div>
+    <div class="certificate">
+      <img src="udemy html.jpg" alt="Certificate 2">
+    </div>
+    <!-- Add more certificates here -->
+  </div>
+  <div class="arrow left" onclick="prevSlide()">&#10094;</div>
+  <div class="arrow right" onclick="nextSlide()">&#10095;</div>
+</div>
+
+<script>
+  let slideIndex = 0;
+
+  function showSlides() {
+    const slides = document.querySelectorAll('.certificate');
+    if (slideIndex >= slides.length) {
+      slideIndex = 0;
+    }
+    if (slideIndex < 0) {
+      slideIndex = slides.length - 1;
+    }
+    const offset = -slideIndex * slides[0].offsetWidth;
+    document.querySelector('.carousel-container').style.transform = `translateX(${offset}px)`;
+    
+    // Update description
+    const descriptions = document.querySelectorAll('.description');
+    descriptions.forEach((description, index) => {
+      if (index === slideIndex) {
+        description.style.display = 'block';
+      } else {
+        description.style.display = 'none';
+      }
+    });
+  }
+
+  function nextSlide() {
+    slideIndex++;
+    showSlides();
+  }
+
+  function prevSlide() {
+    slideIndex--;
+    showSlides();
+  }
+
+  showSlides(); // Show initial slide
+</script>
+
+</body>
+</html>
